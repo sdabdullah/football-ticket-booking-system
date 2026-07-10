@@ -86,4 +86,12 @@ FROM
   JOIN users USING (user_id)
   JOIN matches USING (match_id)
 
-
+--- Query 5: Display a comprehensive list of all users and their booking IDs, ensuring that fans who have never bought a ticket are still listed.
+SELECT
+  user_id,
+  full_name,
+  booking_id
+FROM
+  users
+  LEFT JOIN bookings USING (user_id)
+  LEFT JOIN matches USING (match_id)
