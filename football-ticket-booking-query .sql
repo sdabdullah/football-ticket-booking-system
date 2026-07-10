@@ -4,7 +4,9 @@ DROP TABLE IF EXISTS Matches;
 DROP TABLE IF EXISTS Users;
 
 
----- 1. Users Table successfully Created in Beekeper
+-- =========================================================================
+-- 1. Users Table successfully Created in Beekeper
+-- =========================================================================
 CREATE TABLE Users (
     user_id SERIAL PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -13,8 +15,9 @@ CREATE TABLE Users (
     phone_number VARCHAR(14)
 );
 
-
----- 2. Matches Table successfully Created in Beekeper
+-- =========================================================================
+-- 2. Matches Table successfully Created in Beekeper
+-- =========================================================================
 CREATE TABLE Matches (
     match_id SERIAL PRIMARY KEY,
     fixture VARCHAR(80) NOT NULL,
@@ -24,3 +27,17 @@ CREATE TABLE Matches (
         'Available','Selling Fast','Sold Out','Postponed'
     ))
 );
+
+
+-- =========================================================================
+-- 3. Bookings Table successfully Created in Beekeper
+-- =========================================================================
+CREATE TABLE Bookings (
+    booking_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id) NOT NULL,
+    match_id INT REFERENCES Matches(match_id) NOT NULL,
+    seat_number VARCHAR(10),
+    payment_status VARCHAR(15) CHECK(payment_status IN('Pending','Confirmed','Cancelled','Refunded')),
+    total_cost DECIMAL(10,2) NoT NULL CHECK(total_cost > 0)
+);
+
