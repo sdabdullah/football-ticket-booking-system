@@ -41,3 +41,16 @@ CREATE TABLE Bookings (
     total_cost DECIMAL(10,2) NoT NULL CHECK(total_cost > 0)
 );
 
+--- Query 1: Retrieve all upcoming football matches belonging to the 'Champions League' where the match status is 'Available'.
+
+SELECT
+  match_id,
+  fixture,
+  base_ticket_price
+FROM
+  matches
+WHERE
+  tournament_category = 'Champions League'
+  AND match_status = 'Available';
+
+
