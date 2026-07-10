@@ -69,10 +69,21 @@ SELECT
   booking_id,
   user_id,
   match_id,
-  COALESCE(payment_status, 'Action Required') AS systematic_status
+  COALESCE(payment_status, 'Action Required') AS payment_status
 FROM
   bookings
 WHERE
   payment_status IS NULL;
+
+--- Query 4: Retrieve match booking details along with the User's full name and the scheduled Match fixture teams.
+SELECT
+  booking_id,
+  users.full_name,
+  fixture,
+  total_cost
+FROM
+  bookings
+  JOIN users USING (user_id)
+  JOIN matches USING (match_id)
 
 
